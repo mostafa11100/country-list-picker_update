@@ -65,6 +65,7 @@ class CountryListPicker extends StatefulWidget {
     this.onTap,
     this.controller,
     this.shape,
+    this.raduis,
   }) : assert(isShowFlag == true || isShowDiallingCode == true,
             "Both isShowFlag and isShowCode can't be false")
 
@@ -185,6 +186,7 @@ class CountryListPicker extends StatefulWidget {
   ///
   final ValueChanged<String>? onFieldSubmitted;
   final BoxShape? shape;
+  final double? raduis;
 
   ///
   final GestureTapCallback? onTap;
@@ -405,16 +407,8 @@ class _CountryListPickerState extends State<CountryListPicker> {
           if (widget.isShowFlag == true)
             //  Flexible(
             //child:
-            ClipPath(
-              clipper: TrimmedCircleClipper(),
-              child: Image.asset(
-                "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
-                package: "country_list_picker",
-                fit: BoxFit.cover,
-                height: widget.flagSize.height,
-                width: widget.flagSize.width,
-              ),
-            ),
+            imageshape(shape!, widget.flagSize.height, widget.flagSize.width,
+                country, widget.raduis),
 
 //             ClipOval(
 //               child: Image.asset(
@@ -486,4 +480,29 @@ class TrimmedCircleClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+imageshape(BoxShape shape, h, w, country, radius) {
+  if (shape == BoxShape.circle) {
+    ClipPath(
+      clipper: TrimmedCircleClipper(),
+      child: Image.asset(
+        "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+        package: "country_list_picker",
+        fit: BoxFit.cover,
+        height: h,
+        width: w,
+      ),
+    );
+  }
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(radius),
+    child: Image.asset(
+      "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+      package: "country_list_picker",
+      fit: BoxFit.cover,
+      height: h,
+      width: w,
+    ),
+  );
 }
