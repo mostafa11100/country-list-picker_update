@@ -396,7 +396,7 @@ class _CountryListPickerState extends State<CountryListPicker> {
     }
   }
 
-  Row _buildMainPart(Country country, {required BoxShape shape}) {
+  Row _buildMainPart(Country country, {required BoxShape? shape}) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -409,14 +409,16 @@ class _CountryListPickerState extends State<CountryListPicker> {
               height: widget.flagSize.height,
               width: widget.flagSize.width,
               decoration: BoxDecoration(
-                  shape: shape ?? BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
-                      package: "country_list_picker",
-                    ),
-                    fit: BoxFit.cover,
-                  )),
+                color: Colors.green,
+                shape: shape ?? BoxShape.circle,
+                // image: DecorationImage(
+                //   image: AssetImage(
+                //     "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+                //     package: "country_list_picker",
+                //   ),
+                //   fit: BoxFit.cover,
+                // )
+              ),
             ),
 //             ClipOval(
 //               child: Image.asset(
