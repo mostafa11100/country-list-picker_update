@@ -404,8 +404,7 @@ class _CountryListPickerState extends State<CountryListPicker> {
           //flage
           if (widget.isShowFlag == true)
             Flexible(
-                child: ClipRRect(
-              borderRadius: BorderRadius.circular(radius),
+                child: ClipOval(
               child: Image.asset(
                   "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
                   package: "country_list_picker",
