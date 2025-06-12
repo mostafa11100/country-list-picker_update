@@ -64,7 +64,7 @@ class CountryListPicker extends StatefulWidget {
     this.onSaved,
     this.onTap,
     this.controller,
-    required this.radius,
+    this.shape,
   }) : assert(isShowFlag == true || isShowDiallingCode == true,
             "Both isShowFlag and isShowCode can't be false")
 
@@ -184,7 +184,7 @@ class CountryListPicker extends StatefulWidget {
 
   ///
   final ValueChanged<String>? onFieldSubmitted;
-  final double? radius;
+  final BoxShape? shape;
 
   ///
   final GestureTapCallback? onTap;
@@ -279,7 +279,7 @@ class _CountryListPickerState extends State<CountryListPicker> {
                           ? null
                           : () async => await _onTapEvent(context),
                       child: _buildMainPart(selectedCountry!,
-                          radius: widget.radius!),
+                          shape: widget.shape!),
                     ),
                     if (widget.isShowInputField == true)
                       InputField(
@@ -396,7 +396,7 @@ class _CountryListPickerState extends State<CountryListPicker> {
     }
   }
 
-  Row _buildMainPart(Country country, {required double radius}) {
+  Row _buildMainPart(Country country, {required BoxShape shape}) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -405,15 +405,28 @@ class _CountryListPickerState extends State<CountryListPicker> {
           if (widget.isShowFlag == true)
             //  Flexible(
             //child:
-            ClipOval(
-              child: Image.asset(
-                  "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
-                  package: "country_list_picker",
-                  fit: BoxFit.cover,
-                  height: widget.flagSize.height,
-                  width: widget.flagSize.width),
-//            )
+            Container(
+              height: widget.flagSize.height,
+              width: widget.flagSize.width,
+              decoration: BoxDecoration(
+                  shape: shape ?? BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+                      package: "country_list_picker",
+                    ),
+                    fit: BoxFit.cover,
+                  )),
             ),
+//             ClipOval(
+//               child: Image.asset(
+//                   "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+//                   package: "country_list_picker",
+//                   fit: BoxFit.cover,
+//                   height: widget.flagSize.height,
+//                   width: widget.flagSize.width),
+// //            )
+//             ),
           //code
           if (widget.isShowDiallingCode == true)
             Padding(
