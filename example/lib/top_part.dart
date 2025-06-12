@@ -14,7 +14,14 @@ class TopPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer4<PickerProvider, InputProvider, DialogProvider,
         SettingsProvider>(
-      builder: (context, picker, input, dialog, settings, child) {
+      builder: (
+        context,
+        picker,
+        input,
+        dialog,
+        settings,
+        child,
+      ) {
         return CountryListPicker(
           onCountryChanged: ((value) {
             input.hintString = value.local_number_sample;
@@ -91,6 +98,8 @@ class TopPart extends StatelessWidget {
               searchTitle: dialog.searchTileTitle.tr,
             ),
           ),
+          radius: 20,
+          /////herrrrrr
         );
       },
     );

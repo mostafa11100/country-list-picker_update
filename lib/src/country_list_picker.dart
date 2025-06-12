@@ -64,6 +64,7 @@ class CountryListPicker extends StatefulWidget {
     this.onSaved,
     this.onTap,
     this.controller,
+    required this.radius,
   }) : assert(isShowFlag == true || isShowDiallingCode == true,
             "Both isShowFlag and isShowCode can't be false")
 
@@ -183,6 +184,7 @@ class CountryListPicker extends StatefulWidget {
 
   ///
   final ValueChanged<String>? onFieldSubmitted;
+  final double? radius;
 
   ///
   final GestureTapCallback? onTap;
@@ -276,7 +278,8 @@ class _CountryListPickerState extends State<CountryListPicker> {
                       onTap: (widget.onCountryChanged == null)
                           ? null
                           : () async => await _onTapEvent(context),
-                      child: _buildMainPart(selectedCountry!),
+                      child: _buildMainPart(selectedCountry!,
+                          radius: widget.radius!),
                     ),
                     if (widget.isShowInputField == true)
                       InputField(
@@ -393,7 +396,7 @@ class _CountryListPickerState extends State<CountryListPicker> {
     }
   }
 
-  Row _buildMainPart(Country country) {
+  Row _buildMainPart(Country country, {required double radius}) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -401,12 +404,15 @@ class _CountryListPickerState extends State<CountryListPicker> {
           //flage
           if (widget.isShowFlag == true)
             Flexible(
-                child: Image.asset(
-                    "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
-                    package: "country_list_picker",
-                    fit: BoxFit.fill,
-                    height: widget.flagSize.height,
-                    width: widget.flagSize.width)),
+                child: ClipRRect(
+              borderRadius: BorderRadius.circular(radius),
+              child: Image.asset(
+                  "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+                  package: "country_list_picker",
+                  fit: BoxFit.fill,
+                  height: widget.flagSize.height,
+                  width: widget.flagSize.width),
+            )),
           //code
           if (widget.isShowDiallingCode == true)
             Padding(
