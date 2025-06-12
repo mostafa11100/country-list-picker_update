@@ -98,7 +98,7 @@ class TopPart extends StatelessWidget {
               searchTitle: dialog.searchTileTitle.tr,
             ),
           ),
-          radius: 20,
+          shape: null,
           /////herrrrrr
         );
       },
