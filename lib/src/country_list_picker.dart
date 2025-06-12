@@ -409,16 +409,15 @@ class _CountryListPickerState extends State<CountryListPicker> {
               height: widget.flagSize.height,
               width: widget.flagSize.width,
               decoration: BoxDecoration(
-                color: Colors.green,
-                shape: shape ?? BoxShape.circle,
-                // image: DecorationImage(
-                //   image: AssetImage(
-                //     "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
-                //     package: "country_list_picker",
-                //   ),
-                //   fit: BoxFit.cover,
-                // )
-              ),
+                  shape: shape ?? BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://cdn.pixabay.com/photo/2024/12/06/13/16/animal-9248795_1280.jpg"
+                        // "assets/flags/${country.iso_3166_1_alpha2.toLowerCase()}.png",
+                        // package: "country_list_picker",
+                        ),
+                    fit: BoxFit.cover,
+                  )),
             ),
 //             ClipOval(
 //               child: Image.asset(
