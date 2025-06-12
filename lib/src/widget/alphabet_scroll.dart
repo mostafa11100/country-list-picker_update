@@ -10,12 +10,12 @@ class AlphabetScroll extends StatelessWidget {
     required this.alphabet,
     required this.countries,
     required this.selectedChar,
-    this.dialogTheme = const DialogThemeData(),
+    this.dialogTheme = const DialogThemeData2(),
     this.unitsCanceled = 6,
     this.displayName = Names.common,
   });
   final ScrollController scrollController;
-  final DialogThemeData dialogTheme;
+  final DialogThemeData2 dialogTheme;
   final List<String> alphabet;
   final List<Country> countries;
   final String? selectedChar;

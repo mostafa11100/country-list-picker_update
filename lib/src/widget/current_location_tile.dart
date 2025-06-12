@@ -13,7 +13,7 @@ class CurrentLocationTile extends StatelessWidget {
     this.displayName = Names.common,
   });
 
-  final DialogThemeData dialogTheme;
+  final DialogThemeData2 dialogTheme;
   final Country country;
   final Languages language;
   final Names displayName;
